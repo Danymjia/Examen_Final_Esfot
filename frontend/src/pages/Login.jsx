@@ -10,7 +10,6 @@ export default function Login() {
   const [isSubmitAttempted, setIsSubmitAttempted] = useState(false);
   const navigate = useNavigate();
 
-  // Validaciones
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isPasswordValid = password.length >= 4;
 
@@ -75,7 +74,7 @@ export default function Login() {
         }}
       >
         <div className="text-center mb-4">
-          <h3 className="fw-bold text-dark">Portal Académico</h3>
+          <h3 className="fw-bold text-dark">Login</h3>
           <p className="text-muted">Ingresa tus credenciales para continuar</p>
         </div>
 
@@ -92,7 +91,7 @@ export default function Login() {
             />
             <label htmlFor="floatingEmail">Correo Electrónico</label>
             <div className="invalid-feedback">
-              Ingresa un correo con formato válido (ej. usuario@dominio.com).
+              Ingresa un correo con formato válido (ej. juan@gmail.com).
             </div>
           </div>
 

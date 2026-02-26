@@ -1,28 +1,75 @@
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-    const navigate = useNavigate();
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        navigate("/");
-    };
-    return (
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
-   <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm mb-4">
-     <div className="container">
-       <Link
-         className="navbar-brand fw-bold d-flex align-items-center gap-2"
-         to="/dashboard"
-       >Sistema de Matrículas
-       </Link>
-       <div className="d-flex">
-         <button
-           className="btn btn-light text-primary fw-bold shadow-sm transition-hover"
-           onClick={handleLogout}
-         >Cerrar Sesión
-         </button>
-       </div>
-     </div>
-   </nav>
-);
+  return (
+    <nav className="sticky-top py-3" style={{ zIndex: 1000 }}>
+      <div className="container">
+        <div className="glass-panel px-4 py-3 d-flex justify-content-between align-items-center">
+          <Link
+            className="navbar-brand fw-bold d-flex align-items-center gap-3 text-decoration-none"
+            to="/dashboard"
+          >
+            <div
+              className="d-flex justify-content-center align-items-center text-white"
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "10px",
+                background:
+                  "linear-gradient(110deg, var(--primary), var(--accent))",
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l2.052 2.053 5.378-5.362a.08.08 0 0 1 .042-.045z" />
+              </svg>
+            </div>
+            <span
+              className="text-secondary fs-4"
+              style={{ letterSpacing: "-0.5px" }}
+            >
+              Bienvenido Mercy
+            </span>
+          </Link>
+
+          <div className="d-flex">
+            <button
+              className="btn btn-premium d-flex align-items-center gap-2"
+              onClick={handleLogout}
+              style={{ padding: "0.5rem 1.25rem" }}
+            >
+              <span>Cerrar Sesión</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
+                />
+                <path
+                  fillRule="evenodd"
+                  d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
 }
