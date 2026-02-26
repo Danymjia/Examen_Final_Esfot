@@ -18,7 +18,7 @@ const materiaSchema = new Schema({
         default:null
     },
     creditos:{  
-        type:Number,
+        type:String,
         default:null
     },
     status:{        
