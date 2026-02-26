@@ -33,12 +33,10 @@ const crearMatricula = async (req,res) =>{
 
 const verMatricula = async (req, res) => {
     try {
-        
-        const matriculas = await Matricula.find()
-            .populate("estudiante", "nombre apellido cedula")
+        const matriculasBDD = await Matricula.find()
+            .populate("estudiante", "nombre email")
             .populate("materia", "nombre codigo creditos");
-            
-        res.status(200).json(matriculas);
+        res.status(200).json({ msg: "Matrículas encontradas", matriculas: matriculasBDD });
     } catch (error) {
         res.status(500).json({ msg: "Error al listar las matrículas", error: error.message });
     }
@@ -93,6 +91,5 @@ export {
     crearMatricula ,
     verMatricula,
     actualizarMatricula,
-    eliminarMatricula
-    
+    eliminarMatricula   
 }

@@ -15,14 +15,11 @@ const crearMateria = async (req, res) => {
 }
 
 const verMateria = async (req, res) => {
-    try{
-        const {id} = req.params
-        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({msg:"ID de materia no válido"})
-        const materiaBDD = await Materia.findById(id)
-        if(!materiaBDD) return res.status(404).json({msg:"Materia no encontrada"})
-        res.status(200).json({msg:"Materia encontrada", materia:materiaBDD})
+    try {
+        const materiasBDD = await Materia.find()    
+        res.status(200).json({msg:"Materias encontradas", materias:materiasBDD})
     } catch (error) {
-        res.status(500).json({msg:"Error al ver la materia", error:error.message})
+        res.status(500).json({msg:"Error al listar las materias", error:error.message})
     }
 }
 

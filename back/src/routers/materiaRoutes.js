@@ -4,7 +4,7 @@ import { verificarTokenJWT } from '../middlewares/JWT.js'
 const router = Router()
 
 router.post("/crear", verificarTokenJWT, crearMateria)
-router.get("/ver/:id", verificarTokenJWT, verMateria)
+router.get("/ver", verificarTokenJWT, verMateria)
 router.put("/actualizar/:id", verificarTokenJWT, actualizarMateria)
 router.delete("/eliminar/:id", verificarTokenJWT, eliminarMateria)
 

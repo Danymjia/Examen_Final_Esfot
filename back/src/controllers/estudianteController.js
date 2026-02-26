@@ -15,13 +15,11 @@ const crearEstudiante = async (req, res) => {
 }
 
 const verEstudiante = async (req, res) => {
-    try{
-        const {id} = req.params
-        const estudianteBDD = await Estudiante.findById(id)
-        if(!estudianteBDD) return res.status(404).json({msg:"Estudiante no encontrado"})
-        res.status(200).json({msg:"Estudiante encontrado", estudiante:estudianteBDD})
+    try {
+        const estudiantesBDD = await Estudiante.find()
+        res.status(200).json({msg:"Estudiantes encontrados", estudiantes:estudiantesBDD})
     } catch (error) {
-        res.status(500).json({msg:"Error al ver el estudiante", error:error.message})
+        res.status(500).json({msg:"Error al listar los estudiantes", error:error.message})
     }
 }
 
