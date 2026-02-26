@@ -15,7 +15,7 @@ export default function ModulePage() {
   const loadData = async () => {
     try {
       const res = await getAll(entity);
-      setData(res.data);
+      setData(Array.isArray(res) ? res : res?.data || []);
     } catch (error) {
       toast.error("Error al cargar datos");
     }
@@ -35,7 +35,11 @@ export default function ModulePage() {
       );
       return;
     }
-    await create(entity, { nombre: nombre.trim() });
+    const payload =
+      entity === "matriculas"
+        ? { descripcion: nombre.trim() }
+        : { nombre: nombre.trim() };
+    await create(entity, payload);
     toast.success("Registro agregado!");
     setNombre("");
     setIsSubmitAttempted(false);
@@ -135,18 +139,23 @@ export default function ModulePage() {
                           </td>
                         </tr>
                       ) : (
-                        data.map((item) => (
-                          <tr key={item.id} className="align-middle">
+                        data.map((item, index) => (
+                          <tr
+                            key={item.id || item._id || index}
+                            className="align-middle"
+                          >
                             <td className="px-4 fw-bold text-muted">
-                              {item.id}
+                              {item.id || item._id}
                             </td>
                             <td className="px-4 fw-semibold text-dark">
-                              {item.nombre}
+                              {item.nombre || item.descripcion}
                             </td>
                             <td className="px-4 text-end">
                               <button
                                 className="btn btn-outline-danger btn-sm transition-hover"
-                                onClick={() => handleDelete(item.id)}
+                                onClick={() =>
+                                  handleDelete(item.id || item._id)
+                                }
                               >
                                 Eliminar
                               </button>
