@@ -3,6 +3,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors';
 import usuarioRoutes from './routers/usuarioRoutes.js';
+import materiaRoutes from './routers/materiaRoutes.js';
 
 // Inicializaciones
 const app = express()
@@ -24,13 +25,8 @@ app.get('/',(req,res)=> res.send("Server on"))
 app.use('/api/usuario', usuarioRoutes)
 
 // Rutas de materia
-//app.use('/api', materiaRoutes)
+app.use('/api/materia', materiaRoutes)
 
-// Rutas de estudiante
-//app.use('/api/est', estudianteRoutes)
-
-// Rutas de matrícula
-//app.use('/api/mat', matriculaRoutes)
 
 // Exportar la instancia de express por medio de app
 export default app
