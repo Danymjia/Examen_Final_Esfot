@@ -1,0 +1,41 @@
+import jwt from "jsonwebtoken";
+import Usuario from "../models/Usuario.js";
+
+/**
+ * Crear token JWT
+ * @param {string} id - ID del usuario
+ * @param {string} rol - Rol del usuario
+ * @returns {string} token - JWT
+ */
+const crearTokenJWT = (id, rol) => {
+    return jwt.sign({ id, rol }, process.env.JWT_SECRET, { expiresIn: "1d" })
+}
+
+const verificarTokenJWT = async (req, res, next) => {
+
+    const {authorization} = req.headers
+    if(!authorization) return res.status(401).json({msg:"No hay token, acceso no autorizado"})
+    
+    try{
+        const token = authorization.split(" ")[1]
+        const {id,rol} = jwt.verify(token, process.env.JWT_SECRET)
+
+        if(rol === "usuario"){
+            const usuarioBDD = await Usuario.findById(id).lean().select("-password")
+            if(!usuarioBDD) return res.status(404).json({msg:"El usuario no existe"})
+            req.usuario = usuarioBDD
+            return next()
+        } else {
+            return res.status(403).json({msg:"No tienes permisos para realizar esta acción"})
+        }
+
+    } catch (error){  
+        console.error(error)
+        return res.status(401).json({msg:`Token no válido o expirado- ${error}`})
+    }
+}
+
+export {
+    crearTokenJWT,
+    verificarTokenJWT
+}

@@ -2,6 +2,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors';
+import usuarioRoutes from './routers/usuarioRoutes.js';
 
 // Inicializaciones
 const app = express()
@@ -20,7 +21,7 @@ app.set('port',process.env.PORT || 3000)
 app.get('/',(req,res)=> res.send("Server on"))
 
 // Rutas de usuario
-//app.use('/api/usuario', usuarioRoutes)
+app.use('/api/usuario', usuarioRoutes)
 
 // Rutas de materia
 //app.use('/api', materiaRoutes)
