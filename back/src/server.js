@@ -5,6 +5,7 @@ import cors from 'cors';
 import usuarioRoutes from './routers/usuarioRoutes.js';
 import materiaRoutes from './routers/materiaRoutes.js';
 import estudianteRoutes from './routers/estudianteRoutes.js';
+import matriculaRoutes from './routers/matriculaRoutes.js';
 
 // Inicializaciones
 const app = express()
@@ -30,6 +31,9 @@ app.use('/api/materia', materiaRoutes)
 
 //Ruta de estudiante
 app.use('/api/estudiante', estudianteRoutes)
+
+// Ruta de matrícula
+app.use('/api/matricula', matriculaRoutes)
 
 // Exportar la instancia de express por medio de app
 export default app
